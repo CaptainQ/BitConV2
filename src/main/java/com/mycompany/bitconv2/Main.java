@@ -24,23 +24,42 @@ import org.bitcoinj.params.MainNetParams;
  * @author patrickmccaffrey
  */
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws IOException {
         System.out.println("Program BitConV2 start");
+        Scanner user_input = new Scanner( System.in );
+        
+        System.out.print("Would you like to create more training data? (y): ");
+        
+        if ("y".equals(user_input.next().toLowerCase())) {
+            generateTrainingData();
+            System.out.println("end if statement");
+        }
+        else {
+            System.out.println("end else statement");
+        }
+        
+        System.out.println("Program finished");
+    }
+    
+    private static void generateTrainingData() throws IOException {
+        Scanner user_input = new Scanner( System.in );
         
         String[] tempKeyPair = new String[2];
         int trainingQuantity;
         
-        System.out.println("How many more training pairs do you want to generate?");
-        Scanner user_input = new Scanner( System.in );
+        System.out.println("How many more training pairs do you want to generate? (723,000 pairs per hour on surface)");
         trainingQuantity = Integer.parseInt(user_input.next());
+        
+        int loggingInt = 100;
         
         for (int i = 0; i < trainingQuantity; i++) {
             tempKeyPair = keyGenerator();
             saveKeyPair(tempKeyPair);
-            System.out.println(i + "th itteration.");
+            if (i + 1 == loggingInt) {
+                System.out.println((i + 1) + "th itteration.");
+                loggingInt = loggingInt + 100;
+            }
         }
-        
-        System.out.println("Program finished");
     }
     
     private static String[] keyGenerator() {
