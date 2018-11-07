@@ -6,14 +6,11 @@
 package com.mycompany.bitconv2;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Scanner;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
@@ -32,10 +29,9 @@ public class Main {
         
         if ("y".equals(user_input.next().toLowerCase())) {
             generateTrainingData();
-            System.out.println("end if statement");
         }
         else {
-            System.out.println("end else statement");
+            
         }
         
         System.out.println("Program finished");
