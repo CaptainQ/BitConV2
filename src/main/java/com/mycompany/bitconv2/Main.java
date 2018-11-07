@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.Scanner;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.params.MainNetParams;
@@ -26,17 +27,23 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         System.out.println("Program BitConV2 start");
         
-        String[] tempKeyPair =  keyGenerator();
+        String[] tempKeyPair = new String[2];
+        int trainingQuantity;
         
-        System.out.println("Values Returned: " + tempKeyPair[0] + " and " + tempKeyPair[1]);
+        System.out.println("How many more training pairs do you want to generate?");
+        Scanner user_input = new Scanner( System.in );
+        trainingQuantity = Integer.parseInt(user_input.next());
         
-        saveKeyPair(tempKeyPair);
+        for (int i = 0; i < trainingQuantity; i++) {
+            tempKeyPair = keyGenerator();
+            saveKeyPair(tempKeyPair);
+            System.out.println(i + "th itteration.");
+        }
         
         System.out.println("Program finished");
     }
     
     private static String[] keyGenerator() {
-        System.out.println("keyGenerator starting");
         
         NetworkParameters params = MainNetParams.get();
         String filePrefix = "forwarding-service";
@@ -48,20 +55,13 @@ public class Main {
         returnValue[0] = key.getPrivateKeyAsHex();
         returnValue[1] = "" + key.toAddress(params);
         
-        System.out.println("Private Key: " + returnValue[0]);
-        System.out.println("Adress: " + returnValue[1]);
-        
-        System.out.println("keyGenerator finished");
         return returnValue;
     }
     
     private static void saveKeyPair(String[] keyPair) throws FileNotFoundException, IOException {
-        System.out.println("saveKeyPair started");
         
         String wholeLine = keyPair[0] + " " + keyPair[1] + System.lineSeparator();
         
         Files.write(Paths.get("testKeyPair.txt"), wholeLine.getBytes(), StandardOpenOption.APPEND);
-        
-        System.out.println("saveKeyPair finished");
     }
 }
