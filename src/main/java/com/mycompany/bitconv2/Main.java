@@ -43,7 +43,7 @@ public class Main {
         String[] tempKeyPair = new String[2];
         int trainingQuantity;
         
-        System.out.println("How many more training pairs do you want to generate? (723,000 pairs per hour on surface)");
+        System.out.println("How many more training pairs do you want to generate? (723,000 pairs per hour on surface, 18,000,000 pairs per hour on iMac, 970,000 = about 100mb)");
         trainingQuantity = Integer.parseInt(user_input.next());
         
         int loggingInt = 100;
