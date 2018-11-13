@@ -21,9 +21,11 @@ import org.bitcoinj.params.MainNetParams;
  * @author patrickmccaffrey
  */
 public class Main {
+    static Scanner user_input = new Scanner( System.in );
+    
     public static void main(String[] args) throws IOException {
         System.out.println("Program BitConV2 start");
-        Scanner user_input = new Scanner( System.in );
+        //Scanner user_input = new Scanner( System.in );
         
         System.out.print("Would you like to create more training data? (y): ");
         
