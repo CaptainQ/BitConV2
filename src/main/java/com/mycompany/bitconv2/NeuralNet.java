@@ -13,18 +13,27 @@ public class NeuralNet {
     String privateKey;
     String publicAdress;
     
-    static Node[][] inputNodeArray = new Node[16][64];
-    static Node[][] outputNodeArray = new Node[36][34];
+    Node[][] inputNodeArray = new Node[16][64];
+    Node[][] outputNodeArray = new Node[36][34];
     
-    static int blackBoxArrayWidth;
-    static int blackBoxArrayDepth;
-    static Node[][] blackBoxArray;
+    int blackBoxArrayWidth;
+    int blackBoxArrayDepth;
+    Node[][] blackBoxArray;
     
-    public NeuralNet() {
+    private NeuralNet() {
         
     }
     
-    public static void NewNeuralNet() {
+    private static NeuralNet _net; //names single instance of the class
+    
+    public static NeuralNet getNeuralNet() //public method that returns the single instance of the Neural Net so that other objects can grab nodes
+    {
+        if (_net == null)
+            _net = new NeuralNet();
+        return _net;
+    }
+    
+    public void NewNeuralNet() {
         System.out.println("Building a new Neural Net.");
         
         System.out.print("How many nodes wide should the black box be? ");
@@ -38,7 +47,7 @@ public class NeuralNet {
         blackBoxArray = new Node[blackBoxArrayWidth][blackBoxArrayDepth];
     }
     
-    public static void RecoverNeuralNet() {
+    public void RecoverNeuralNet() {
         
     }
 }

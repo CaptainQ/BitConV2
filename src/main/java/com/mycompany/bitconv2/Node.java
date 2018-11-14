@@ -10,19 +10,22 @@ package com.mycompany.bitconv2;
  * @author allkn
  */
 public class Node {
-    static Double[] parentLayerInputMultipliers;
-    static Double bias;
-    static Double output;
-    static boolean newNode;
+    Double[] parentLayerInputMultipliers;
+    Double bias;
+    Double output;
+    int netLayer;
+    boolean newNode;
     
-    public Node(boolean checkNewNode, Node[][] parentLayer) {
+    public Node(boolean checkNewNode, Node[][] parentLayer, int layer) {
         parentLayerInputMultipliers = new Double[parentLayer.length * parentLayer[0].length];
         newNode = checkNewNode;
+        netLayer = layer;
     }
     
-    public Node(boolean checkNewNode, Node[] parentLayer) {
+    public Node(boolean checkNewNode, Node[] parentLayer, int layer) {
         parentLayerInputMultipliers = new Double[parentLayer.length];
         newNode = checkNewNode;
+        netLayer = layer;
     }
     
     public Node(boolean checkNewNode) {
@@ -30,7 +33,7 @@ public class Node {
         newNode = checkNewNode;
     }
     
-    public static void initialiseNode() {
+    public void initialiseNode() {
         if (newNode == true) {
             initialiseParentLayerDoubles();
             initialiseBias();
@@ -40,13 +43,23 @@ public class Node {
         }
     }
     
-    public static void initialiseParentLayerDoubles() {
+    public void initialiseParentLayerDoubles() {
         for (int i = 0; i < parentLayerInputMultipliers.length; i++) {
             parentLayerInputMultipliers[i] = 0.0; //create random value.
         }
     }
     
-    public static void initialiseBias() {
+    public void initialiseBias() {
         bias = 0.0; //create random value.
+    }
+    
+    public void GetOutput() {
+        Node test = NeuralNet.getNeuralNet().blackBoxArray[1][1]; //test to see if i can grab a specific node from the active net
+        if (netLayer == 0) {
+            //Read from file
+        }
+        else {
+            
+        }
     }
 }
