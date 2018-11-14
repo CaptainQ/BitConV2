@@ -13,12 +13,12 @@ public class NeuralNet {
     String privateKey;
     String publicAdress;
     
-    String[] inputNodeArray;
-    String[] outputNodeArray;
-    String[][] blackBoxArray;
+    static Node[][] inputNodeArray = new Node[16][64];
+    static Node[][] outputNodeArray = new Node[36][34];
     
-    static int blackBoxArraywidth;
-    static int blackBoxArraydepth;
+    static int blackBoxArrayWidth;
+    static int blackBoxArrayDepth;
+    static Node[][] blackBoxArray;
     
     public NeuralNet() {
         
@@ -28,17 +28,17 @@ public class NeuralNet {
         System.out.println("Building a new Neural Net.");
         
         System.out.print("How many nodes wide should the black box be? ");
-        blackBoxArraywidth = Integer.parseInt(Main.user_input.next().toLowerCase());
+        blackBoxArrayWidth = Integer.parseInt(Main.user_input.next().toLowerCase());
         System.out.println("");
         
         System.out.print("How many nodes deep should the black box be? ");
-        blackBoxArraydepth = Integer.parseInt(Main.user_input.next().toLowerCase());
+        blackBoxArrayDepth = Integer.parseInt(Main.user_input.next().toLowerCase());
         System.out.println("");
         
-        
+        blackBoxArray = new Node[blackBoxArrayWidth][blackBoxArrayDepth];
     }
     
-    public static void ReconstructNeuralNet() {
+    public static void RecoverNeuralNet() {
         
     }
 }
