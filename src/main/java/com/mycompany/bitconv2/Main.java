@@ -38,7 +38,7 @@ public class Main {
         
         System.out.println("Program finished");
         
-        NeuralNet net = new NeuralNet();
+        NeuralNet net = NeuralNet.getNeuralNet();
     }
     
     private static void generateTrainingData() throws IOException {
