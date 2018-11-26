@@ -45,9 +45,19 @@ public class NeuralNet {
         System.out.println("");
         
         blackBoxArray = new Node[blackBoxArrayWidth][blackBoxArrayDepth];
+        
+        //initialize all nodes with random values
     }
     
     public void RecoverNeuralNet() {
         
+    }
+    
+    public String RunNeuralNet(String pub) {
+        publicAdress = pub;
+        //use key to set inputNodeArray[x][y] biases
+        //run the net
+        //set privateKey = net results
+        return privateKey;
     }
 }
