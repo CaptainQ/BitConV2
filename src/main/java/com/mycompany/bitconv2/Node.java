@@ -13,24 +13,28 @@ public class Node {
     Double[] parentLayerInputMultipliers;
     Double bias;
     Double output;
-    int netLayer;
+    int netLayer; //Black Box starts at layer 1
     boolean newNode;
     
     public Node(boolean checkNewNode, Node[][] parentLayer, int layer) { //First layer of black box, reads from Neuralet.inputNodeArray
         parentLayerInputMultipliers = new Double[parentLayer.length * parentLayer[0].length];
         newNode = checkNewNode;
         netLayer = layer;
+        initialiseNode();
     }
     
     public Node(boolean checkNewNode, Node[] parentLayer, int layer) { //Middle layers of black box
         parentLayerInputMultipliers = new Double[parentLayer.length];
         newNode = checkNewNode;
         netLayer = layer;
+        initialiseNode();
     }
     
     public Node(boolean checkNewNode) { //Node with no parent layer: NeuralNet.inputNodeArray nodes
         parentLayerInputMultipliers = new Double[0];
         newNode = checkNewNode;
+        netLayer = 0;
+        initialiseNode();
     }
     
     public void initialiseNode() {
@@ -63,7 +67,7 @@ public class Node {
             //Do nothing, this is handled by the first part of NeuralNet.RunNeuralNet() this should never be called on input layer nodes.
         }
         else {
-            //read parent layer and do the node math
+            //read parent layer's node's output Double and do the node math
             //save as Double to output.
         }
     }
