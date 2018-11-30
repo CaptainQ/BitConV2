@@ -33,12 +33,14 @@ public class Main {
             generateTrainingData();
         }
         else {
-            
+            System.out.println("Generating New Neural Net");
+            NeuralNet net = NeuralNet.getNeuralNet();
+            net.generateNewNeuralNet();
+            System.out.println("finished generating newural net");
+            System.out.println("Private key: " + net.runNeuralNet("517566F99573E09F5D43D823756228D7019E098FEAC6F557856C5261F69F8786"));
         }
         
         System.out.println("Program finished");
-        
-        NeuralNet net = NeuralNet.getNeuralNet();
     }
     
     private static void generateTrainingData() throws IOException {
@@ -53,7 +55,7 @@ public class Main {
         int loggingInt = 100;
         
         for (int i = 0; i < trainingQuantity; i++) {
-            tempKeyPair = keyGenerator();
+            tempKeyPair = generateKeys();
             saveKeyPair(tempKeyPair);
             if (i + 1 == loggingInt) {
                 System.out.println((i + 1) + "th itteration.");
@@ -62,7 +64,7 @@ public class Main {
         }
     }
     
-    private static String[] keyGenerator() {
+    private static String[] generateKeys() {
         
         NetworkParameters params = MainNetParams.get();
         String filePrefix = "forwarding-service";
