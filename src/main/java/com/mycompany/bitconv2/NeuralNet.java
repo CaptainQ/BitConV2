@@ -5,6 +5,14 @@
  */
 package com.mycompany.bitconv2;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 /**
  *
  * @author allkn
@@ -72,8 +80,86 @@ public class NeuralNet {
         }
     }
     
-    public void recoverNeuralNet() {
+    public void saveNeuralNet() throws IOException {
+        String saveBuffer;
         
+        saveBuffer = blackBoxArrayDepth + "x" + blackBoxArrayWidth + System.lineSeparator();
+        Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+        
+        //save layer 0 parent input multipliers
+        for (int i = 0; i < blackBoxArray[0].length; i++) {
+            saveBuffer = blackBoxArray[0][i].netLayer + "L";
+            Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+            saveBuffer = i + "N";
+            Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+            saveBuffer = blackBoxArray[0][i].bias + "B";
+            Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+            for (int j = 0; j < blackBoxArray[0][i].parentLayerInputMultipliers.length; j++) {
+                saveBuffer = blackBoxArray[0][i].parentLayerInputMultipliers[j] + "M";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            }
+            
+            saveBuffer = System.lineSeparator();
+            Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+        }
+        
+        //save layer 1-bottom parent input multipliers
+        for (int i = 1; i < blackBoxArray.length; i++) {
+            for (int j = 0; j < blackBoxArray[i].length; j++) {
+                saveBuffer = blackBoxArray[i][j].netLayer + "L";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+                saveBuffer = j + "N";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+                saveBuffer = blackBoxArray[i][j].bias + "B";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+                
+                for (int k = 0; k < blackBoxArray[i][j].parentLayerInputMultipliers.length; k++) {
+                    saveBuffer = blackBoxArray[i][j].parentLayerInputMultipliers[k] + "M";
+                    Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+                }
+            
+                saveBuffer = System.lineSeparator();
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            }
+        }
+        
+        //save layer bottom+1 parent input multipliers
+        for (int i = 0; i < outputNodeArray.length; i++) {
+            for (int j = 0; j < outputNodeArray[i].length; j++) {
+                saveBuffer = outputNodeArray[i][j].netLayer + "L";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+                
+                saveBuffer = i + "C";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+                saveBuffer = j + "N";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            
+                saveBuffer = outputNodeArray[i][j].bias + "B";
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+                
+                for (int k = 0; k < outputNodeArray[i][j].parentLayerInputMultipliers.length; k++) {
+                    saveBuffer = outputNodeArray[i][j].parentLayerInputMultipliers[k] + "M";
+                    Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+                }
+            
+                saveBuffer = System.lineSeparator();
+                Files.write(Paths.get("savedNet.txt"), saveBuffer.getBytes(), StandardOpenOption.APPEND);
+            }
+        }
+    }
+    
+    public void recoverNeuralNet() throws FileNotFoundException, IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("savedNet.txt"));
+        String curentLine;
+        String buffer;
+        curentLine = reader.readLine();
+        blackBoxArrayDepth = 
     }
     
     public String runNeuralNet(String pub) {
