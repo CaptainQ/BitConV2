@@ -38,11 +38,11 @@ public class NeuralNet {
     public void generateNewNeuralNet() {
         System.out.println("Building a new Neural Net.");
         
-        System.out.print("How many nodes wide should the black box be? ");
+        System.out.print("How many nodes wide should the black box be? (1100 should be fine) ");
         blackBoxArrayWidth = Integer.parseInt(Main.user_input.next().toLowerCase());
         System.out.println("");
         
-        System.out.print("How many nodes deep should the black box be? ");
+        System.out.print("How many nodes deep should the black box be? (After 20 it starts using a lot of memory) ");
         blackBoxArrayDepth = Integer.parseInt(Main.user_input.next().toLowerCase());
         System.out.println("");
         
