@@ -14,8 +14,8 @@ public class NeuralNet {
     String publicAdress;
     
     
-    Node[][] inputNodeArray = new Node[36][34];
-    Node[][] outputNodeArray = new Node[16][64];
+    Node[][] inputNodeArray = new Node[34][36];
+    Node[][] outputNodeArray = new Node[64][16];
     String outputRef = "";
     
     int blackBoxArrayWidth;
@@ -46,28 +46,28 @@ public class NeuralNet {
         blackBoxArrayDepth = Integer.parseInt(Main.user_input.next().toLowerCase());
         System.out.println("");
         
-        blackBoxArray = new Node[blackBoxArrayWidth][blackBoxArrayDepth];
+        blackBoxArray = new Node[blackBoxArrayDepth][blackBoxArrayWidth];
         
         //initialize all nodes with random values
-        for (int character = 0; character < 34; character++) {
-            for (int letter = 0; letter < 36; letter++) {
-                inputNodeArray[letter][character] = new Node(true);
+        for (int character = 0; character < inputNodeArray.length; character++) {
+            for (int letter = 0; letter < inputNodeArray[character].length; letter++) {
+                inputNodeArray[character][letter] = new Node(true);
             }
         }
         
         for (int n = 0; n < blackBoxArray[0].length; n++) {
-            blackBoxArray[n][0] = new Node(true, inputNodeArray, 0);
+            blackBoxArray[0][n] = new Node(true, inputNodeArray, 0);
         }
         
         for (int layer = 1; layer < blackBoxArray.length; layer++) {
             for (int n = 0; n < blackBoxArray[layer].length; n++) {
-                blackBoxArray[n][layer] = new Node(true, blackBoxArray[layer-1], layer);
+                blackBoxArray[layer][n] = new Node(true, blackBoxArray[layer-1], layer);
             }
         }
         
-        for (int character = 0; character < 64; character++) {
-            for (int letter = 0; letter < 16; letter++) {
-                outputNodeArray[letter][character] = new Node(true, blackBoxArray[blackBoxArray.length-1], blackBoxArray.length);
+        for (int character = 0; character < outputNodeArray.length; character++) {
+            for (int letter = 0; letter < outputNodeArray[character].length; letter++) {
+                outputNodeArray[character][letter] = new Node(true, blackBoxArray[blackBoxArray.length-1], blackBoxArray.length);
             }
         }
     }
@@ -77,10 +77,10 @@ public class NeuralNet {
     }
     
     public String runNeuralNet(String pub) {
-        for (int i = 0; i < 34; i++) { //set all to zero, just to be safe
-            for (int j = 0; j < 36; j++) {
-                inputNodeArray[j][i].setBias(0.0);
-                inputNodeArray[j][i].setOutput(0.0);
+        for (int i = 0; i < inputNodeArray.length; i++) { //set all to zero, just to be safe
+            for (int j = 0; j < inputNodeArray[i].length; j++) {
+                inputNodeArray[i][j].setBias(0.0);
+                inputNodeArray[i][j].setOutput(0.0);
             }
         }
         
@@ -88,89 +88,89 @@ public class NeuralNet {
         //use key to set inputNodeArray[x][y] biases
         for (int i = 0; i < 34; i++) {
             switch (publicAdress.toLowerCase().charAt(i)) {
-                case '0': inputNodeArray[0][i].setOutput(1.0);
+                case '0': inputNodeArray[i][0].setOutput(1.0);
                         break;
-                case '1': inputNodeArray[1][i].setOutput(1.0);
+                case '1': inputNodeArray[i][1].setOutput(1.0);
                         break;
-                case '2': inputNodeArray[2][i].setOutput(1.0);
+                case '2': inputNodeArray[i][2].setOutput(1.0);
                         break;
-                case '3': inputNodeArray[3][i].setOutput(1.0);
+                case '3': inputNodeArray[i][3].setOutput(1.0);
                         break;
-                case '4': inputNodeArray[4][i].setOutput(1.0);
+                case '4': inputNodeArray[i][4].setOutput(1.0);
                         break;
-                case '5': inputNodeArray[5][i].setOutput(1.0);
+                case '5': inputNodeArray[i][5].setOutput(1.0);
                         break;
-                case '6': inputNodeArray[6][i].setOutput(1.0);
+                case '6': inputNodeArray[i][6].setOutput(1.0);
                         break;
-                case '7': inputNodeArray[7][i].setOutput(1.0);
+                case '7': inputNodeArray[i][7].setOutput(1.0);
                         break;
-                case '8': inputNodeArray[8][i].setOutput(1.0);
+                case '8': inputNodeArray[i][8].setOutput(1.0);
                         break;
-                case '9': inputNodeArray[9][i].setOutput(1.0);
+                case '9': inputNodeArray[i][9].setOutput(1.0);
                         break;
-                case 'a': inputNodeArray[10][i].setOutput(1.0);
+                case 'a': inputNodeArray[i][10].setOutput(1.0);
                         break;
-                case 'b': inputNodeArray[11][i].setOutput(1.0);
+                case 'b': inputNodeArray[i][11].setOutput(1.0);
                         break;
-                case 'c': inputNodeArray[12][i].setOutput(1.0);
+                case 'c': inputNodeArray[i][12].setOutput(1.0);
                         break;
-                case 'd': inputNodeArray[13][i].setOutput(1.0);
+                case 'd': inputNodeArray[i][13].setOutput(1.0);
                         break;
-                case 'e': inputNodeArray[14][i].setOutput(1.0);
+                case 'e': inputNodeArray[i][14].setOutput(1.0);
                         break;
-                case 'f': inputNodeArray[15][i].setOutput(1.0);
+                case 'f': inputNodeArray[i][15].setOutput(1.0);
                         break;
-                case 'g': inputNodeArray[16][i].setOutput(1.0);
+                case 'g': inputNodeArray[i][16].setOutput(1.0);
                         break;
-                case 'h': inputNodeArray[17][i].setOutput(1.0);
+                case 'h': inputNodeArray[i][17].setOutput(1.0);
                         break;
-                case 'i': inputNodeArray[18][i].setOutput(1.0);
+                case 'i': inputNodeArray[i][18].setOutput(1.0);
                         break;
-                case 'j': inputNodeArray[19][i].setOutput(1.0);
+                case 'j': inputNodeArray[i][19].setOutput(1.0);
                         break;
-                case 'k': inputNodeArray[20][i].setOutput(1.0);
+                case 'k': inputNodeArray[i][20].setOutput(1.0);
                         break;
-                case 'l': inputNodeArray[21][i].setOutput(1.0);
+                case 'l': inputNodeArray[i][21].setOutput(1.0);
                         break;
-                case 'm': inputNodeArray[22][i].setOutput(1.0);
+                case 'm': inputNodeArray[i][22].setOutput(1.0);
                         break;
-                case 'n': inputNodeArray[23][i].setOutput(1.0);
+                case 'n': inputNodeArray[i][23].setOutput(1.0);
                         break;
-                case 'o': inputNodeArray[24][i].setOutput(1.0);
+                case 'o': inputNodeArray[i][24].setOutput(1.0);
                         break;
-                case 'p': inputNodeArray[25][i].setOutput(1.0);
+                case 'p': inputNodeArray[i][25].setOutput(1.0);
                         break;
-                case 'q': inputNodeArray[26][i].setOutput(1.0);
+                case 'q': inputNodeArray[i][26].setOutput(1.0);
                         break;
-                case 'r': inputNodeArray[27][i].setOutput(1.0);
+                case 'r': inputNodeArray[i][27].setOutput(1.0);
                         break;
-                case 's': inputNodeArray[28][i].setOutput(1.0);
+                case 's': inputNodeArray[i][28].setOutput(1.0);
                         break;
-                case 't': inputNodeArray[29][i].setOutput(1.0);
+                case 't': inputNodeArray[i][29].setOutput(1.0);
                         break;
-                case 'u': inputNodeArray[30][i].setOutput(1.0);
+                case 'u': inputNodeArray[i][30].setOutput(1.0);
                         break;
-                case 'v': inputNodeArray[31][i].setOutput(1.0);
+                case 'v': inputNodeArray[i][31].setOutput(1.0);
                         break;
-                case 'w': inputNodeArray[32][i].setOutput(1.0);
+                case 'w': inputNodeArray[i][32].setOutput(1.0);
                         break;
-                case 'x': inputNodeArray[33][i].setOutput(1.0);
+                case 'x': inputNodeArray[i][33].setOutput(1.0);
                         break;
-                case 'y': inputNodeArray[34][i].setOutput(1.0);
+                case 'y': inputNodeArray[i][34].setOutput(1.0);
                         break;
-                case 'z': inputNodeArray[35][i].setOutput(1.0);
+                case 'z': inputNodeArray[i][35].setOutput(1.0);
                         break;
             }
         }
         //run the net
         for (int bBLayer = 0; bBLayer < blackBoxArray.length; bBLayer++) {
             for (int n = 0; n < blackBoxArray[bBLayer].length; n++) {
-                blackBoxArray[n][bBLayer].calculateOutput();
+                blackBoxArray[bBLayer][n].calculateOutput();
             }
         }
         for (int outputCharacter = 0; outputCharacter < outputNodeArray.length; outputCharacter++) {
             for (int characterOption = 0; characterOption < outputNodeArray[outputCharacter].length; characterOption++) {
-                outputNodeArray[characterOption][outputCharacter].calculateOutput();
+                outputNodeArray[outputCharacter][characterOption].calculateOutput();
             }
         }
         //Build code that checks all outputNodeArray nodes and finds the character option for each character slot with the highest output double. Convert these to single string and save it to private key
@@ -179,11 +179,11 @@ public class NeuralNet {
         for (int outputCharacter = 0; outputCharacter < outputNodeArray.length; outputCharacter++) {
             int characterOptionSlot = 0; //should end up between 0 and 15 (inclusive)
             for (int characterOption = 1; characterOption < outputNodeArray[outputCharacter].length; characterOption++) {
-                if (outputNodeArray[characterOption][outputCharacter].output > outputNodeArray[characterOption-1][outputCharacter].output) {
+                if (outputNodeArray[outputCharacter][characterOption].output > outputNodeArray[outputCharacter][characterOption-1].output) {
                     characterOptionSlot = characterOption;
                 }
             }
-            privateKeyArray[outputCharacter] = characterOptionSlot;
+            privateKeyArray[outputCharacter] = characterOptionSlot; //sets output character index to value between 0 and 15 (inclusive)
         }
         //set privateKey = net results
         privateKey = "";

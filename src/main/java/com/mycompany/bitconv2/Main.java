@@ -36,7 +36,7 @@ public class Main {
             System.out.println("Generating New Neural Net");
             NeuralNet net = NeuralNet.getNeuralNet();
             net.generateNewNeuralNet();
-            System.out.println("finished generating newural net");
+            System.out.println("finished generating neural net");
             System.out.println("Private key: " + net.runNeuralNet("517566F99573E09F5D43D823756228D7019E098FEAC6F557856C5261F69F8786"));
         }
         

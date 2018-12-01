@@ -73,7 +73,7 @@ public class Node {
         return output;
     }
     
-    public double compressToSigmoid(double value) {
+    public Double compressToSigmoid(Double value) {
         return 1 / (1 + (Math.pow(1.5, value)));
     }
     
@@ -91,14 +91,14 @@ public class Node {
                 //save as Double to output.
                 for (int character = 0; character < net.inputNodeArray.length; character++) {
                     for (int letter = 0; letter < net.inputNodeArray[character].length; letter++) {
-                        temp = temp + (net.inputNodeArray[letter][character].returnOutput() * parentLayerInputMultipliers[count]);
+                        temp = temp + (net.inputNodeArray[character][letter].returnOutput() * parentLayerInputMultipliers[count]);
                         count++;
                     }
                 }
             }
             else {
                 for (int node = 0; node < net.blackBoxArray[netLayer-1].length; node++) {
-                    temp = temp + (net.blackBoxArray[node][netLayer-1].returnOutput() * parentLayerInputMultipliers[node]);
+                    temp = temp + (net.blackBoxArray[netLayer-1][node].returnOutput() * parentLayerInputMultipliers[node]);
                 }
             }
         }
